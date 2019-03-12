@@ -1,0 +1,16 @@
+aws eks --region ap-southeast-1 update-kubeconfig --name eks-test
+
+ami-0fa3f3282eb89b795
+
+
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
+helm upgrade --install gitlab gitlab/gitlab \
+  --timeout 600 \
+  --set global.hosts.domain=example.com \
+  --set global.hosts.externalIP=10.10.10.10 \
+  --set certmanager-issuer.email=email@example.com
+
+
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJla3MtYWRtaW4tdG9rZW4tc25qNTciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZWtzLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYjcyOTQ2NmQtNDRiZS0xMWU5LWJjMGMtMDZiMjI5MzQ1ZWU0Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmVrcy1hZG1pbiJ9.pZwiUjioarcpYmf8kOZ5oe0LI_3OX0TBegbFLyQVF4o7OfmS_0R_UsuH2cAGRpxeZ4TN_GHh_HQXdkES6hUKtBD0GLFbnRskx7PpqH-DQ6PgozqJ8rxCyVV6oq8PQnWgtNxEVJ782xnHmRp6pwIsr79xeShM-m1SHidjK6NgWRaCn5Z-RCW1gDhJhqX0-KlytbF-H3kPn6gXxZW3j7fgHY94-XfEBALZ3TKHs4O04o-rPd2NrrYFuzPSYBufD8QEQN6ep7Z6wtePGS76zzwtKF-9eMWISKyHm-Qr4bP7AUc4MjmQtY_Lt9EzDAf1Zy8C9iGd2JstoCTppCPh8I-jcg

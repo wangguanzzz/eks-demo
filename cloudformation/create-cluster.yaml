@@ -1,0 +1,13 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create EKS Cluster
+Resources:
+  EKSCluster:
+    Type: "AWS::EKS::Cluster"
+    Properties:
+      Name: "eks-test"
+      Version: "1.11"
+      RoleArn: "arn:aws:iam::309130516031:role/chriseks-test"
+      ResourcesVpcConfig:
+        SecurityGroupIds: ["sg-06ffa9f0add71b3bc"]
+        SubnetIds: ["subnet-cefaf2a9", "subnet-3deb2c64", "subnet-2d447c64"]
