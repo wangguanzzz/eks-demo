@@ -6,8 +6,7 @@ metadata:
     app: jenkins
 spec:
   ports:
-    - port: 80
-      targetPort: 8080
+    - port: 8080
   selector:
     app: jenkins
     tier: frontend
@@ -53,10 +52,9 @@ spec:
               name: jenkins
             - containerPort: 50000
               name: jenkins-slave
-          #command: ["sh", "-c", "chown -R 1000:1000 /var/jenkins_home"]
-          #volumeMounts:
-          #  - name: jenkins-vl-data
-          #    mountPath: /var/jenkins_home
+          volumeMounts:
+            - name: jenkins-vl-data
+              mountPath: /var/jenkins_home
       volumes:
         - name: jenkins-vl-data
           persistentVolumeClaim:

@@ -12,6 +12,45 @@ spec:
     tier: frontend
   type: LoadBalancer
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-pv-data
+  labels:
+    app: gitlab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-pv-log
+  labels:
+    app: gitlab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-pv-config
+  labels:
+    app: gitlab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
@@ -36,4 +75,25 @@ spec:
           name: gitlab
           ports:
             - containerPort: 80
-              name: gitlab
+              name: gitlab-http
+            - containerPort: 443
+              name: gitlab-https
+            - containerPort: 22
+              name: gitlab-ssh
+          volumeMounts:
+            - name: gitlab-vl-data
+              mountPath: /var/opt/gitlab
+            - name: gitlab-vl-log
+              mountPath: /var/log/gitlab
+            - name: gitlab-vl-config
+              mountPath: /etc/gitlab
+      volumes:
+        - name: gitlab-vl-data
+          persistentVolumeClaim:
+            claimName: gitlab-pv-data
+        - name: gitlab-vl-log
+          persistentVolumeClaim:
+            claimName: gitlab-pv-log
+        - name: gitlab-vl-config
+          persistentVolumeClaim:
+            claimName: gitlab-pv-config
