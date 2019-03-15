@@ -1,8 +1,13 @@
 aws eks --region ap-southeast-1 update-kubeconfig --name eks-test
 
-ami-0fa3f3282eb89b795
+# ******** install helm
+ kubectl create serviceaccount tiller --namespace kube-system
+ kubectl apply -f ./rbac-config.yaml
+ helm init --service-account tiller
+ kubectl get pods --namespace kube-system | grep tiller
+ helm repo update
 
-
+#************* Helm install Gitlab
 helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 helm upgrade --install gitlab gitlab/gitlab \
